@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>五子棋</title>
+    <style>
+        /* 棋盘样式 */
+        #board { background: url('wood.jpg'); padding:20px; }
+        .cell { width:30px; height:30px; border:1px solid #999; }
+    </style>
+</head>
+<body>
+    <div id="board"></div>
+    <script>
+        // 初始化15x15棋盘
+        const board = document.getElementById('board');
+        let currentPlayer = 1; // 1:黑棋 2:白棋
+        
+        // 创建棋盘逻辑
+        for(let i=0; i<225; i++){
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.onclick = () => placePiece(cell);
+            board.appendChild(cell);
+        }
+
+        // 落子逻辑
+        function placePiece(cell){
+            if(!cell.dataset.value){
+                cell.style.backgroundColor = currentPlayer === 1 ? '#000' : '#fff';
+                cell.dataset.value = currentPlayer;
+                checkWin() || (currentPlayer = 3 - currentPlayer);
+            }
+        }
+    </script>
+</body>
+</html>
